@@ -1,0 +1,30 @@
+# Python
+venv/
+backend/venv/
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# Uploaded files
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+
+# Logs
+*.log

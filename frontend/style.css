@@ -1,0 +1,52 @@
+body{
+
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:40px;
+
+}
+
+.container{
+
+    width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+
+}
+
+h1{
+
+    text-align:center;
+
+}
+
+.upload-section{
+
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+
+}
+
+button{
+
+    padding:10px 20px;
+    cursor:pointer;
+
+}
+
+li{
+
+    margin:15px 0;
+
+}
+
+a{
+
+    margin-right:15px;
+
+}
