@@ -1,73 +1,136 @@
-const API="http://localhost:5000";
+const API = "";
 
-async function loadFiles(){
+async function loadFiles() {
 
-    const response=await fetch(`${API}/files`);
+    try {
 
-    const files=await response.json();
+        const response = await fetch("/files", {
+            cache: "no-store"
+        });
 
-    const list=document.getElementById("fileList");
+        const files = await response.json();
 
-    list.innerHTML="";
+        console.log("Files:", files);
 
-    files.forEach(file=>{
+        const list = document.getElementById("fileList");
 
-        list.innerHTML+=`
+        list.innerHTML = "";
 
-        <li>
+        files.forEach(file => {
 
-            ${file}
+            list.innerHTML += `
+                <li>
+                    ${file}
 
-            <a href="${API}/download/${file}" target="_blank">
+                    <a href="/download/${encodeURIComponent(file)}" target="_blank">
+                        Download
+                    </a>
 
-            Download
+                    <button onclick="deleteFile('${file}')">
+                        Delete
+                    </button>
+                </li>
+            `;
 
-            </a>
+        });
 
-            <button onclick="deleteFile('${file}')">
+    }
 
-            Delete
+    catch (err) {
 
-            </button>
+        console.error("Unable to load files", err);
 
-        </li>
-
-        `;
-
-    });
-
-}
-
-async function uploadFile(){
-
-    const input=document.getElementById("fileInput");
-
-    const data=new FormData();
-
-    data.append("file",input.files[0]);
-
-    await fetch(`${API}/upload`,{
-
-        method:"POST",
-
-        body:data
-
-    });
-
-    loadFiles();
+    }
 
 }
 
-async function deleteFile(file){
 
-    await fetch(`${API}/delete/${file}`,{
+async function uploadFile() {
 
-        method:"DELETE"
+    console.log("Upload button clicked");
 
-    });
+    const input = document.getElementById("fileInput");
 
-    loadFiles();
+    console.log(input.files);
+
+    if (input.files.length === 0) {
+
+        alert("Please choose a file first.");
+
+        return;
+
+    }
+
+    const data = new FormData();
+
+    data.append("file", input.files[0]);
+
+    console.log("Sending upload request...");
+
+    try {
+
+        const response = await fetch("/upload", {
+
+            method: "POST",
+
+            body: data
+
+        });
+
+        console.log("Response:", response.status);
+
+        if (!response.ok) {
+
+            const error = await response.text();
+
+            console.error(error);
+
+            alert("Upload failed.");
+
+            return;
+
+        }
+
+        input.value = "";
+
+        await loadFiles();
+
+        console.log("Upload complete.");
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        alert("Upload failed.");
+
+    }
 
 }
+
+
+async function deleteFile(file) {
+
+    try {
+
+        await fetch(`/delete/${encodeURIComponent(file)}`, {
+
+            method: "DELETE"
+
+        });
+
+        await loadFiles();
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
 
 loadFiles();

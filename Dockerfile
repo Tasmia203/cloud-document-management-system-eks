@@ -13,6 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the backend application into the container
 COPY backend/ .
 
+# Copy frontend into Flask static folder
+COPY frontend/ ./static/
+
 # Expose the Flask port
 EXPOSE 5000
 
