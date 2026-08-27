@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-BUCKET_NAME = "tasmia-cloud-file-manager"
+BUCKET_NAME = os.environ["BUCKET_NAME"]
 
 s3 = boto3.client(
     "s3",

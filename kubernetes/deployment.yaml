@@ -41,6 +41,16 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 3
             failureThreshold: 3
+          
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+            
 
           env:
             - name: AWS_ACCESS_KEY_ID
@@ -58,5 +68,11 @@ spec:
             - name: AWS_DEFAULT_REGION
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret
+                  name: cloud-file-manager-config
                   key: AWS_DEFAULT_REGION
+            
+            - name: BUCKET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: cloud-file-manager-config
+                  key: BUCKET_NAME
