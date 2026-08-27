@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: cloud-file-manager
-          image: 544015793973.dkr.ecr.us-east-1.amazonaws.com/cloud-file-manager:latest
+          image: 544015793973.dkr.ecr.us-east-1.amazonaws.com/cloud-file-manager:IMAGE_TAG
 
           ports:
             - containerPort: 5000
