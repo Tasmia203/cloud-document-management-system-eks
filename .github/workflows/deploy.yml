@@ -50,13 +50,12 @@ jobs:
             --name $EKS_CLUSTER_NAME \
             --region $AWS_REGION
 
-      - name: Update deployment image
+      - name: Deploy with Helm
         run: |
-          sed -i "s|IMAGE_TAG|${{ github.sha }}|g" kubernetes/deployment.yaml
+          helm upgrade --install cloud-file-manager ./cloud-file-manager \
+            --set image.repository=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }} \
+            --set image.tag=${{ github.sha }}
 
-      - name: Deploy to EKS
+      - name: Verify rollout
         run: |
-          kubectl apply -f kubernetes/configmap.yaml
-          kubectl apply -f kubernetes/deployment.yaml
-          kubectl apply -f kubernetes/service.yaml
           kubectl rollout status deployment/cloud-file-manager

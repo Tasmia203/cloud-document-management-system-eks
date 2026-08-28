@@ -1,0 +1,23 @@
+replicaCount: 2
+
+image:
+  repository: 544015793973.dkr.ecr.us-east-1.amazonaws.com/cloud-file-manager
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 5000
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+aws:
+  region: us-east-1
+  bucketName: tasmia-cloud-file-manager

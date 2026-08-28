@@ -2,24 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: cloud-file-manager
+  name: {{ include "cloud-file-manager.fullname" . }}
 
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
 
   selector:
     matchLabels:
-      app: cloud-file-manager
+      app: {{ include "cloud-file-manager.name" . }}
 
   template:
     metadata:
       labels:
-        app: cloud-file-manager
+        app: {{ include "cloud-file-manager.name" . }}
 
     spec:
       containers:
-        - name: cloud-file-manager
-          image: 544015793973.dkr.ecr.us-east-1.amazonaws.com/cloud-file-manager:IMAGE_TAG
+        - name: {{ include "cloud-file-manager.name" . }}
+
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           ports:
             - containerPort: 5000
@@ -44,12 +46,12 @@ spec:
           
           resources:
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: {{ .Values.resources.requests.cpu | quote }}
+              memory: {{ .Values.resources.requests.memory | quote }}
 
             limits:
-              cpu: "500m"
-              memory: "512Mi"
+              cpu: {{ .Values.resources.limits.cpu | quote }}
+              memory: {{ .Values.resources.limits.memory | quote }}
             
 
           env:
@@ -68,11 +70,11 @@ spec:
             - name: AWS_DEFAULT_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: cloud-file-manager-config
+                  name: {{ include "cloud-file-manager.fullname" . }}-config
                   key: AWS_DEFAULT_REGION
             
             - name: BUCKET_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: cloud-file-manager-config
+                  name: {{ include "cloud-file-manager.fullname" . }}-config
                   key: BUCKET_NAME
