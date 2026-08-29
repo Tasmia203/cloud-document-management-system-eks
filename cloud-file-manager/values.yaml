@@ -6,7 +6,7 @@ image:
   pullPolicy: Always
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
   targetPort: 5000
 
@@ -17,6 +17,9 @@ resources:
   limits:
     cpu: "500m"
     memory: "512Mi"
+
+ingress:
+  enabled: true
 
 aws:
   region: us-east-1
