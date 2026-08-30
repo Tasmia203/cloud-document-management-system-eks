@@ -85,6 +85,16 @@ def delete_file(filename):
 
     return jsonify({"message": "File deleted successfully"})
 
+@app.route("/stress")
+def stress():
+    total = 0
+    for i in range(100000000):
+        total += i
+    return jsonify({
+        "message": "CPU stress test completed",
+        "result": total
+    })
+
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({
