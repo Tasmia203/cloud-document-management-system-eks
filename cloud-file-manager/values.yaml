@@ -24,3 +24,8 @@ ingress:
 aws:
   region: us-east-1
   bucketName: tasmia-cloud-file-manager
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 50
