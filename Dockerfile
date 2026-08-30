@@ -5,7 +5,7 @@ FROM python:3.13-slim
 WORKDIR /app
 
 # Create a non-root user
-RUN useradd --create-home --shell /bin/bash appuser
+RUN useradd --create-home --shell /bin/bash --uid 1000 appuser
 
 # Copy the backend requirements file
 COPY backend/requirements.txt .
