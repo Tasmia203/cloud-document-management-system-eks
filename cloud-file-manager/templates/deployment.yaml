@@ -17,6 +17,11 @@ spec:
         app: {{ include "cloud-file-manager.name" . }}
 
     spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
       containers:
         - name: {{ include "cloud-file-manager.name" . }}
 
