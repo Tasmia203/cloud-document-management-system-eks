@@ -79,6 +79,19 @@ This project demonstrates containerization, Kubernetes, Infrastructure as Code, 
 - Horizontal Pod Autoscaler
 - YAML
 - REST API
+---
+
+# Live Application
+
+The Cloud File Manager application is deployed on Amazon EKS and exposed through an AWS Application Load Balancer.
+
+<img width="1484" height="856" alt="cloud-file-manager" src="https://github.com/user-attachments/assets/117f651f-9ae0-468e-88af-a1e2835d7bf0" />
+
+### Live API
+
+The backend API is also accessible through the ALB.
+
+<img width="1499" height="342" alt="live-api" src="https://github.com/user-attachments/assets/88fe506e-2d8e-43eb-82d0-ec4effd3228d" />
 
 ---
 
