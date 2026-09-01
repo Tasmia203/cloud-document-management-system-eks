@@ -164,7 +164,7 @@ backend/app.py
 - Configured the container to run as `appuser`
 - Verified the Docker image build successfully
 
-### Evidence
+### Docker Build
 
 <img width="686" height="407" alt="docker-build" src="https://github.com/user-attachments/assets/6ea02c1b-7162-4446-bfb3-bb07d505d729" />
 
