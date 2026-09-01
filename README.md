@@ -115,7 +115,6 @@ Users can:
 
 The frontend is copied into the Flask application's static directory during the Docker image build.
 
-![](screenshots/cloud-file-manager-frontend.png)
 
 ---
 
@@ -123,7 +122,6 @@ The frontend is copied into the Flask application's static directory during the 
 
 The application is exposed through an AWS Application Load Balancer created through Kubernetes Ingress and the AWS Load Balancer Controller.
 
-![](screenshots/live-application.png)
 
 ---
 
@@ -907,4 +905,3 @@ Through this project I learned how to:
 - Add more advanced observability
 - Configure production-grade persistent monitoring storage
 
-Cloud / IT Infrastructure Portfolio Project
