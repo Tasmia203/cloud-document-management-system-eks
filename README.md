@@ -83,27 +83,11 @@ This project demonstrates containerization, Kubernetes, Infrastructure as Code, 
 
 # Live Application
 
-The Cloud File Manager application is deployed on Amazon EKS and exposed through an AWS Application Load Balancer.
+The Cloud File Manager application is deployed on Amazon EKS and exposed through an AWS Application Load Balancer using Kubernetes Ingress and the AWS Load Balancer Controller.
 
-<img width="1484" height="856" alt="cloud-file-manager" src="https://github.com/user-attachments/assets/117f651f-9ae0-468e-88af-a1e2835d7bf0" />
+### Frontend
 
-### Live API
-
-The backend API is also accessible through the ALB.
-
-<img width="1499" height="342" alt="live-api" src="https://github.com/user-attachments/assets/88fe506e-2d8e-43eb-82d0-ec4effd3228d" />
-
----
-
-# Architecture Diagram
-
-![](screenshots/architecture-diagram.png)
-
----
-
-# Frontend
-
-The Cloud File Manager frontend provides a simple web interface for interacting with the application.
+The application provides a web interface for interacting with files stored in Amazon S3.
 
 Users can:
 
@@ -113,17 +97,22 @@ Users can:
 - Download files
 - Delete files
 
-The frontend is copied into the Flask application's static directory during the Docker image build.
+<img width="1484" height="856" alt="cloud-file-manager" src="https://github.com/user-attachments/assets/42050d7d-9d0a-42fe-9d9a-e41f0b111fdc" />
 
+### Live API
+
+The backend API is also accessible through the AWS Application Load Balancer.
+
+<img width="1499" height="342" alt="live-api" src="https://github.com/user-attachments/assets/16e264e4-3b83-4722-b465-738e503fabf8" />
+
+---
+
+# Architecture Diagram
+
+![](screenshots/architecture-diagram.png)
 
 ---
 
-# Live Application
-
-The application is exposed through an AWS Application Load Balancer created through Kubernetes Ingress and the AWS Load Balancer Controller.
-
-
----
 
 # Project Phases
 
@@ -177,7 +166,7 @@ backend/app.py
 
 ### Evidence
 
-![](screenshots/01-docker-build.png)
+<img width="686" height="407" alt="docker-build" src="https://github.com/user-attachments/assets/6ea02c1b-7162-4446-bfb3-bb07d505d729" />
 
 ---
 
@@ -199,9 +188,12 @@ backend/app.py
 cloud-file-manager
 ```
 
-### Evidence
+<img width="1511" height="775" alt="ecr-repository" src="https://github.com/user-attachments/assets/b7fab591-8680-4b3e-a095-efdacf04bb86" />
 
-![](screenshots/02-ecr-repository.png)
+### ECR Images
+
+<img width="1512" height="802" alt="ecr-images" src="https://github.com/user-attachments/assets/5d3ca6d0-4fda-45f0-a7a6-8c899e334f58" />
+
 
 ---
 
@@ -224,13 +216,12 @@ cloud-file-manager
 cloud-file-manager
 ```
 
-### Evidence
+<img width="1510" height="793" alt="eks-cluster" src="https://github.com/user-attachments/assets/44e2e43d-97e4-4dd8-ab2b-0462cf1d90f2" />
 
-![](screenshots/03-eks-cluster.png)
 
 ### Kubernetes Pods
 
-![](screenshots/04-eks-pods.png)
+<img width="689" height="114" alt="eks-pods" src="https://github.com/user-attachments/assets/f3603c78-77c4-4020-b147-20bf760d8f4a" />
 
 ---
 
@@ -254,9 +245,7 @@ cloud-file-manager
 tasmia-cloud-file-manager
 ```
 
-### Evidence
-
-![](screenshots/05-s3-bucket.png)
+<img width="1511" height="829" alt="s3-bucket" src="https://github.com/user-attachments/assets/39970b94-34b1-49cd-917d-5bf1c8ea78b5" />
 
 ---
 
@@ -282,13 +271,7 @@ terraform plan
 terraform apply
 ```
 
-### Evidence
-
-![](screenshots/06-terraform-folder.png)
-
-![](screenshots/07-terraform-plan.png)
-
-![](screenshots/08-terraform-apply.png)
+<img width="915" height="574" alt="terraform" src="https://github.com/user-attachments/assets/07ce8249-b40b-4f36-abde-e81377fadeab" />
 
 ---
 
@@ -339,9 +322,7 @@ Deploy Helm Chart
 Verify Kubernetes Rollout
 ```
 
-### Evidence
-
-![](screenshots/09-github-actions-success.png)
+<img width="1509" height="831" alt="github-actions-success" src="https://github.com/user-attachments/assets/e1f5e515-9c64-46dc-abe0-b2fcc9d9e887" />
 
 ---
 
@@ -379,11 +360,9 @@ helm template cloud-file-manager ./cloud-file-manager
 helm upgrade --install cloud-file-manager ./cloud-file-manager
 ```
 
-### Evidence
+### Helm Release
 
-![](screenshots/10-helm-chart.png)
-
-![](screenshots/11-helm-release.png)
+<img width="1129" height="73" alt="helm-release" src="https://github.com/user-attachments/assets/b01277dc-2960-41a7-bca7-833c0b57aebf" />
 
 ---
 
@@ -423,11 +402,13 @@ ClusterIP Service
 Flask Application Pods
 ```
 
-### Evidence
+### Alb Ingress
 
-![](screenshots/12-alb-ingress.png)
+<img width="872" height="61" alt="alb-ingress" src="https://github.com/user-attachments/assets/99eb53a9-cebd-4d93-983f-bae1e4957555" />
 
-![](screenshots/13-load-balancer.png)
+### Load Balancer
+
+<img width="1507" height="836" alt="load-balancer" src="https://github.com/user-attachments/assets/36c40954-2d62-400f-a734-8570051d1a07" />
 
 ### Validation
 
@@ -479,11 +460,14 @@ Prometheus successfully monitored:
 
 ### Prometheus Targets
 
-![](screenshots/14-prometheus-targets.png)
+<img width="1506" height="864" alt="prometheus-targets-top" src="https://github.com/user-attachments/assets/806fa74d-8c37-4b09-9a6d-05025668feda" />
+
+<img width="1503" height="868" alt="prometheus-targets-bottom" src="https://github.com/user-attachments/assets/a94927a7-d7a5-4562-b5a8-6365667e49f4" />
+
 
 ### Grafana Dashboard
 
-![](screenshots/15-grafana-dashboard.png)
+<img width="1486" height="843" alt="grafana-dashboard" src="https://github.com/user-attachments/assets/1df00f20-d38e-4b5a-895f-e382f8bde71a" />
 
 ### Monitoring Commands
 
@@ -542,9 +526,9 @@ Higher CPU Load
 3 Application Pods
 ```
 
-### HPA Evidence
+### HPA Scaling
 
-![](screenshots/16-hpa-scaling.png)
+<img width="914" height="224" alt="hpa-scaling" src="https://github.com/user-attachments/assets/7bcaa87c-6b93-4940-b88d-11c943b7732b" />
 
 ### HPA Commands
 
@@ -629,11 +613,9 @@ securityContext:
     type: RuntimeDefault
 ```
 
-### Evidence
+### Production Security
 
-![](screenshots/17-production-readiness.png)
-
-![](screenshots/18-non-root-container.png)
+<img width="1491" height="742" alt="production-security" src="https://github.com/user-attachments/assets/7ade3de4-e44b-418d-ba68-d2ca4ba3e17a" />
 
 ---
 
@@ -677,9 +659,9 @@ Expected response:
 
 ### Evidence
 
-![](screenshots/19-final-kubernetes-state.png)
+<img width="878" height="346" alt="final-kubernetes-state" src="https://github.com/user-attachments/assets/d1da70f7-b4ea-45f5-a0fa-82229ff49823" />
 
-![](screenshots/20-final-application.png)
+<img width="1500" height="825" alt="final-application" src="https://github.com/user-attachments/assets/53bd7d8f-b708-4916-96a9-cf93eaec239e" />
 
 ---
 
