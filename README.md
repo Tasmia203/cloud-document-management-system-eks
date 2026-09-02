@@ -109,7 +109,8 @@ The backend API is also accessible through the AWS Application Load Balancer.
 
 # Architecture Diagram
 
-![](screenshots/architecture-diagram.png)
+<img width="428" height="528" alt="architecture-diagram" src="https://github.com/user-attachments/assets/b29fb3ab-ce2e-48b5-b971-fbc4297c8362" />
+
 
 ---
 
